@@ -8,7 +8,7 @@ const Wrapper = styled.section`
   color: ${(props) => props.theme.textColor};
   text-align:center;
   font-size:2rem;
-  margin:3rem;
+  padding:3rem;
 `;
 
 const App = () => {
@@ -16,7 +16,6 @@ const App = () => {
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-
     setValue(value);
    };
 
@@ -26,12 +25,17 @@ const App = () => {
   }
 
   return <Wrapper className="App">
-      {/* <Circle borderColor="black" bgColor="teal" />
-      <Circle text="i am hereeeee" bgColor="tomato" /> */}
+      <Container>
     <form onSubmit={handleSubmit} >
       <input onChange={handleChange}  type="text " placeholder="write your value" />
     </form>
+    </Container>
   </Wrapper>;
 };
+
+const Container = styled.section`
+background-color:${props => props.theme.backgroundColor};
+color:${props => props.theme.textColor};
+min-height:100vh;`;
 
 export default App;
