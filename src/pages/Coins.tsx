@@ -1,57 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Loader from "../components/Loader";
-import { CoinsInterface } from "../interface/props";
-import { API_URL } from "../utils/helper";
+import {useQuery} from 'react-query';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import {fetchCoins} from '../api';
+import Loader from '../components/Loader';
+import {CoinsInterface} from '../interface/props';
+import {COIN_IMAGE} from '../utils/helper';
 
-
-
-  
 const Coins = () => {
-    const [coins, setCoins] = useState<CoinsInterface[]>([]);
-    const [loading, setLoading] = useState(true);
-    
-    const getData = async () => {
-        setLoading(true);
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            const slicedData = data.slice(0, 100);
-            setCoins(slicedData);
-            setLoading(false);
-        }
-        catch (error) {
-            throw new Error();
-        }
-    };
+  const {data, isLoading} = useQuery<CoinsInterface[]>('allCoins', fetchCoins);
+  const slicedData = data && data.slice(0, 100);
 
-    useEffect(() => {
-        getData();
-    }, []);
+  if (isLoading) {
+    return <Loader />;
+  }
 
-    if (loading) {
-        return <Loader />
-    }
-
-    return <Container>
-    <Header>
-      <Title>코인</Title>
-    </Header>
-    <CoinsList>
-      {coins.map((coin) => (
-        <Coin key={coin.id}>
-          <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
-        </Coin>
-      ))}
-    </CoinsList>
-  </Container>
+  return (
+    <Container>
+      <Header>
+        <Title>코인</Title>
+      </Header>
+      <CoinsList>
+        {slicedData &&
+          slicedData.map((coin) => (
+            <Coin key={coin.id}>
+              <img
+                src={`${COIN_IMAGE}${coin.symbol.toLowerCase()}`}
+                alt="coin.name"
+              />
+              <Link state={coin.name} to={`/${coin.id}`}>
+                {coin.name} &rarr;
+              </Link>
+            </Coin>
+          ))}
+      </CoinsList>
+    </Container>
+  );
 };
 
 const Container = styled.div`
   padding: 0px 20px;
-  max-width:480px;
-  margin:auto;
+  max-width: 480px;
+  margin: auto;
 `;
 
 const Header = styled.header`
@@ -69,10 +58,12 @@ const Title = styled.h1`
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: ${props=>props.theme.pointBackgroundColor};
+  background-color: ${(props) => props.theme.pointBackgroundColor};
   color: ${(props) => props.theme.pointTextColor};
   border-radius: 15px;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
   a {
     padding: 20px;
     transition: color 0.2s ease-in;
@@ -83,5 +74,11 @@ const Coin = styled.li`
       color: ${(props) => props.theme.accentColor};
     }
   }
+  img {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 2rem;
+  }
 `;
+
 export default Coins;
