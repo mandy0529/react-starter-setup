@@ -1,9 +1,10 @@
-import { API_INFO_URL, API_PRICE_URL, API_URL } from "./utils/helper"
+
+import { API_CHART_COIN, API_INFO_URL, API_PRICE_URL, API_URL } from "./utils/helper"
 
 export const fetchCoins = async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
-    return data;
+    return data.slice(0,100);
 };
 
 export const fetchInfoCoin = async (id?: string) => {
@@ -17,3 +18,11 @@ export const fetchPriceCoin = async (id?: string) => {
     const data = await response.json();
     return data;
 };
+
+export const fetchChartCoin = async (id?: string) => {
+    const endDate = Math.ceil(Date.now() / 1000);
+    const startDate = endDate - 60 * 60 * 24 * 7;
+    const response = await fetch(`${API_CHART_COIN}${id}/ohlcv/historical?start=${startDate}&end=${endDate}`);
+    const data = await response.json();
+    return data;
+}

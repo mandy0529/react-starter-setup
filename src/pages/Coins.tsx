@@ -8,7 +8,6 @@ import {COIN_IMAGE} from '../utils/helper';
 
 const Coins = () => {
   const {data, isLoading} = useQuery<CoinsInterface[]>('allCoins', fetchCoins);
-  const slicedData = data && data.slice(0, 100);
 
   if (isLoading) {
     return <Loader />;
@@ -20,8 +19,8 @@ const Coins = () => {
         <Title>코인</Title>
       </Header>
       <CoinsList>
-        {slicedData &&
-          slicedData.map((coin) => (
+        {data &&
+          data.map((coin) => (
             <Coin key={coin.id}>
               <img
                 src={`${COIN_IMAGE}${coin.symbol.toLowerCase()}`}

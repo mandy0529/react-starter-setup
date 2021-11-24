@@ -34,8 +34,11 @@ const CoinDetail = ({info, price}: ICoinDetail) => {
             <span>{max_supply}</span>
           </div>
         </div>
-        <Link to="info">info</Link>
-        <Link to="market">market</Link>
+        <div className="button">
+          <Link to="chart">Chart</Link>
+          <Link to="market">market</Link>
+        </div>
+
         <Outlet />
       </div>
     </Wrapper>
@@ -50,10 +53,7 @@ const Wrapper = styled.section`
     max-width: 700px;
     line-height: 2.5rem;
   }
-  a {
-    font-size: 2rem;
-    background-color: ${(props) => props.theme.accentColor};
-  }
+
   .info-flex {
     display: flex;
     justify-content: space-around;
@@ -70,6 +70,22 @@ const Wrapper = styled.section`
     span {
       margin: 0.4rem 0;
       text-transform: uppercase;
+    }
+  }
+  .button {
+    margin: 2rem;
+    a {
+      font-size: 1.4rem;
+      background-color: ${(props) => props.theme.accentColor};
+      padding: 0.5rem 1.5rem;
+      border-radius: 5px;
+      margin: 2rem;
+      transition: all 0.3s ease-in;
+      text-transform: uppercase;
+      &:hover {
+        background-color: ${(props) => props.theme.pointBackgroundColor};
+        color: ${(props) => props.theme.pointTextColor};
+      }
     }
   }
 `;

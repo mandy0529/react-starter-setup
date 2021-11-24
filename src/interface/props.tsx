@@ -75,3 +75,25 @@ export interface ICoinDetail {
     max_supply: number;
   };
 }
+
+export interface IChartCoin {
+  time_open: string;
+  time_close: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  market_cap: number;
+}
+export interface IChartCoinDetail {
+  data: IChartCoin;
+}
+// close: 60439.49093383806
+// high: 60725.37353013922
+// low: 59015.10251451937
+// market_cap: 1137340074520
+// open: 60255.37112544475
+// time_close: "2021-11-17T23:59:59Z"
+// time_open: "2021-11-17T00:00:00Z"
+// volume: 46538391511

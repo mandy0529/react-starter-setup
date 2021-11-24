@@ -34,7 +34,7 @@ const Coin = () => {
 
 const Container = styled.section`
   h1 {
-    margin: 5rem auto;
+    margin: 1rem auto;
     font-size: 3rem;
   }
   padding: 0px 20px;
