@@ -86,8 +86,9 @@ export interface IChartCoin {
   volume: number;
   market_cap: number;
 }
-export interface IChartCoinDetail {
-  data: IChartCoin;
+
+export interface IsayHello {
+  sayHello: () => void;
 }
 // close: 60439.49093383806
 // high: 60725.37353013922

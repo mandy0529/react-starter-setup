@@ -1,6 +1,6 @@
-import {IChartCoin, IChartCoinDetail} from '../interface/props';
+import {IChartCoin} from '../interface/props';
 
-const CandleChart = ({data}: IChartCoinDetail) => {
+const CandleChart = () => {
   return <h1>candle chart</h1>;
 };
 

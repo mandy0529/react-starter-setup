@@ -1,9 +1,8 @@
 import Apexcharts from 'react-apexcharts';
 import styled from 'styled-components';
-import {IChartCoinDetail} from '../interface/props';
+import {IChartCoin} from '../interface/props';
 
-const LineChart = ({data}: IChartCoinDetail) => {
-  console.log(data);
+const LineChart = ({data}: {data: IChartCoin[]}) => {
   return (
     <Wrapper>
       <Apexcharts
